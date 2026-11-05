@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+import { SITE } from '../config';
+---
+<Layout title="Terms and disclaimer" description="Terms of use and disclaimer for GitaVerse: free for personal study, open source under GPL v3, and a note that word meanings may contain mistakes.">
+<main id="main">
+<PageHead title="Terms and disclaimer" lead="Last updated 5 November 2026." />
+<section class="light"><div class="wrap prose">
+  <p>By using GitaVerse you agree to the points below. Please read them once.</p>
+  <h2>Using the app</h2>
+  <p>GitaVerse is free for personal reading, study and reflection. Please do not copy the content of the app in bulk or sell it.</p>
+  <h2>About the text</h2>
+  <p>The Sanskrit verses are ancient, but the transliteration, translations and word meanings are the work of their authors, named on the <a href="/credits">credits page</a>. A translation is an interpretation and can differ from another translator’s. For serious study, please read the original text with a teacher you trust.</p>
+  <div class="callout">The word-by-word meanings and the glossary were written with an AI assistant and may contain mistakes. Check them against a trusted teacher or edition before relying on them for serious study.</div>
+  <h2>Not advice</h2>
+  <p>The app is for reading and reflection. It is not medical, legal, financial or mental-health advice.</p>
+  <h2>No warranty</h2>
+  <p>The app is provided as it is, without promises of any kind. We work to keep it correct and running, but cannot promise that it is free of mistakes.</p>
+  <h2>Licences</h2>
+  <p>The code of the app is open source under the <a href={SITE.source}>GNU General Public License v3.0 or later</a>. The fonts, libraries and verse text have their own licences, shown on the credits page. The GitaVerse name and logo are the author’s own artwork.</p>
+  <h2>Contact</h2>
+  <p><a href={`mailto:${SITE.mail}`}>{SITE.mail}</a></p>
+</div></section></main>
+</Layout>

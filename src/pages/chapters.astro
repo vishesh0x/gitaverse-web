@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+import ChapterList from '../components/ChapterList.astro';
+import Get from '../components/Get.astro';
+import { chapters, glossary, topics } from '../config';
+---
+<Layout title="Bhagavad Gita chapters, topics and glossary" description="All 18 chapters and 700 verses of the Bhagavad Gita with Sanskrit names, one-line summaries, topics and a glossary of 15 key terms." schema={[{ '@type': 'ItemList', name: 'Chapters of the Bhagavad Gita', numberOfItems: chapters.length, itemListElement: chapters.map((c) => ({ '@type': 'ListItem', position: c.number, name: `Chapter ${c.number}: ${c.englishName}` })) }]}>
+<main id="main">
+  <PageHead title="18 chapters, 700 verses." lead="Every chapter in the app, with its Sanskrit name and a one-line summary." />
+  <section class="light" style="padding-bottom:0"><div class="wrap"><ChapterList full /></div></section>
+  <section class="light"><div class="wrap">
+    <div class="sh"><h2 class="rise">Start from a topic.</h2>
+      <p class="lead rise">Home has shortcuts to verses about {topics.map((t) => t.title.toLowerCase()).join(', ')}.</p></div>
+    <div class="gl">{topics.map((t) => <div class="rise"><i>{t.title}</i><p>{t.subtitle}</p></div>)}</div>
+  </div></section>
+  <section class="light" style="padding-top:0"><div class="wrap">
+    <div class="sh"><h2 class="rise">A glossary of {glossary.length} key terms.</h2></div>
+    <div class="gl">{glossary.map((g) => <div class="rise"><b lang="sa">{g.sanskrit}</b><i>{g.roman}</i><p>{g.meaning}</p></div>)}</div>
+    <p class="small" style="margin-top:1.5rem">Glossary entries were written with an AI assistant and may contain mistakes. <a href="/credits">Credits</a></p>
+  </div></section>
+  <Get />
+</main>
+</Layout>

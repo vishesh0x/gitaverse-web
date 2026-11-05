@@ -1,0 +1,121 @@
+---
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource/tiro-devanagari-sanskrit';
+import '../styles/global.css';
+import Icon from '../components/Icon.astro';
+import bricolage from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2?url';
+import { SITE, PAGES } from '../config';
+const { title, seoTitle, description = SITE.desc, noindex = false, schema = [] } = Astro.props;
+const full = seoTitle ?? (title ? `${title} | ${SITE.name}` : SITE.name);
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '') || '/';
+const canon = SITE.url + (path === '/' ? '' : path);
+const page = PAGES.find((p) => p.path === path);
+const nav = [['Features', '/features', 'list'], ['Chapters', '/chapters', 'book'], ['Credits', '/credits', 'heart']];
+const more = [['Home', '/', 'home'], ...nav, ['Privacy', '/privacy', 'shield'], ['Terms', '/terms', 'file'], ['Source code', SITE.source, 'code']];
+const home = path === '/';
+const abs = (p) => SITE.url + p;
+const graph = [
+  ...(home ? [
+    { '@type': 'SoftwareApplication', '@id': SITE.url + '/#app', name: SITE.name, description: SITE.desc, url: SITE.url, image: abs('/icon.png'), operatingSystem: 'Android 8.0 or newer', softwareRequirements: 'Android 8.0 or newer', applicationCategory: 'BooksApplication', softwareVersion: SITE.version, inLanguage: ['sa', 'hi', 'en'], isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, installUrl: SITE.play, downloadUrl: SITE.release, license: 'https://www.gnu.org/licenses/gpl-3.0.html', screenshot: ['01', '02', '04', '07'].map((n) => abs(`/shots/phone-${n}.webp`)), featureList: ['Sanskrit, transliteration, Hindi and English for every verse', 'Word-by-word meanings', 'Private notes and saved verses', 'Daily reading goal, streak and home-screen widget', 'Works fully offline with no internet permission'], author: { '@id': SITE.url + '/#author' } },
+    { '@type': 'WebSite', '@id': SITE.url + '/#site', name: SITE.name, url: SITE.url, inLanguage: 'en', publisher: { '@id': SITE.url + '/#author' } },
+    { '@type': 'Person', '@id': SITE.url + '/#author', name: SITE.author, url: SITE.source, sameAs: [SITE.source] },
+  ] : [
+    { '@type': 'WebPage', '@id': canon + '#page', url: canon, name: full, description, isPartOf: { '@id': SITE.url + '/#site' }, inLanguage: 'en' },
+    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url }, { '@type': 'ListItem', position: 2, name: page?.name ?? title, item: canon }] },
+  ]),
+  ...schema,
+];
+const ld = { '@context': 'https://schema.org', '@graph': graph };
+const foot = [
+  ['The app', [['Google Play', SITE.play, 'play'], ['Download the APK', SITE.release, 'download'], ['Features', '/features', 'list'], ['Chapters', '/chapters', 'book']]],
+  ['The project', [['Source code', SITE.source, 'code'], ['Credits and licences', '/credits', 'heart'], ['Privacy policy', '/privacy', 'shield'], ['Terms', '/terms', 'file']]],
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{full}</title><meta name="description" content={description} /><link rel="canonical" href={canon} />
+  <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} />
+  <meta name="author" content={SITE.author} /><meta name="application-name" content={SITE.name} />
+  <meta property="og:type" content="website" /><meta property="og:site_name" content={SITE.name} /><meta property="og:locale" content="en" />
+  <meta property="og:title" content={full} /><meta property="og:description" content={description} /><meta property="og:url" content={canon} />
+  <meta property="og:image" content={abs('/og.png')} /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="GitaVerse on a tablet showing the Bhagavad Gita in Sanskrit, Hindi and English" />
+  <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={full} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={abs('/og.png')} />
+  <meta name="color-scheme" content="light dark" /><meta name="theme-color" content="#122c6c" />
+  <link rel="preload" href={bricolage} as="font" type="font/woff2" crossorigin />
+  <link rel="icon" href="/favicon.png" /><link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <script is:inline>
+    document.documentElement.classList.add('js');
+    try {
+      var t = localStorage.getItem('theme'), d = document.documentElement;
+      if (t === 'light' || t === 'dark') d.dataset.theme = t;
+      d.dataset.mode = d.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    } catch (e) {}
+  </script>
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="bar">
+    <a class="mark" href="/" aria-label="GitaVerse, home" translate="no"><img src="/icon.png" alt="" width="36" height="36" />GitaVerse</a>
+    <nav aria-label="Main">
+      {nav.map(([t, h]) => <a href={h} class="nl" aria-current={path === h ? 'page' : undefined}>{t}</a>)}
+      <a href={SITE.source} class="nl">Source</a>
+      <button type="button" class="themebtn" id="theme" aria-label="Switch to dark theme"><Icon name="moon" /><Icon name="sun" /></button>
+      <a class="btn sm" href={SITE.play} aria-label="Get the app on Google Play"><Icon name="play" /><span class="lbl">Get the app</span></a>
+      <details class="menu">
+        <summary aria-label="Menu"><Icon name="menu" /><Icon name="x" /></summary>
+        <div class="panel">{more.map(([t, h, i]) => <a href={h} aria-current={path === h ? 'page' : undefined}><Icon name={i} />{t}</a>)}</div>
+      </details>
+    </nav>
+  </header>
+  <slot />
+  <footer class="foot">
+    <div class="wrap">
+      <p class="big" aria-hidden="true" translate="no">GitaVerse</p>
+      <div class="fcols">
+        {foot.map(([h, links]) => <div><h2>{h}</h2>{links.map(([t, u, i]) => <a href={u}><Icon name={i} />{t}</a>)}</div>)}
+        <div><h2>Say hello</h2><a href={`mailto:${SITE.mail}`}><Icon name="mail" />{SITE.mail}</a><p class="small">Questions, corrections and suggestions are welcome.</p></div>
+      </div>
+      <p class="mantra" lang="sa">॥ ॐ श्री कृष्णार्पणमस्तु ॥</p>
+      <p class="small">© 2026 {SITE.author}. GitaVerse is free software under GPL v3 or later. The name and logo are the author’s own artwork.</p>
+    </div>
+  </footer>
+  <dialog id="lb" aria-label="Screenshot viewer">
+    <img alt="" />
+    <div class="lbbar">
+      <button type="button" class="btn alt sm prev" aria-label="Previous screenshot"><Icon name="left" /></button>
+      <span class="cnt" aria-live="polite"></span>
+      <button type="button" class="btn alt sm next" aria-label="Next screenshot"><Icon name="right" /></button>
+      <button type="button" class="btn sm x" aria-label="Close"><Icon name="x" /></button>
+    </div>
+  </dialog>
+  <script is:inline>
+    (() => {
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .1 });
+      document.querySelectorAll('.rise,.wipe').forEach((el, i) => { el.style.setProperty('--d', (i % 3) * 70 + 'ms'); io.observe(el); });
+      const lb = document.getElementById('lb'), lbi = lb.querySelector('img'), zs = [...document.querySelectorAll('[data-zoom]')];
+      let grp = [], idx = 0;
+      const open = (i) => {
+        idx = (i + grp.length) % grp.length; const im = grp[idx].querySelector('img');
+        lbi.src = im.currentSrc || im.src; lbi.alt = im.alt; lb.querySelector('.cnt').textContent = (idx + 1) + ' of ' + grp.length;
+        if (!lb.open) lb.showModal();
+      };
+      zs.forEach((b) => b.addEventListener('click', () => { grp = zs.filter((z) => z.dataset.group === b.dataset.group); open(grp.indexOf(b)); }));
+      lb.querySelector('.prev').onclick = () => open(idx - 1); lb.querySelector('.next').onclick = () => open(idx + 1); lb.querySelector('.x').onclick = () => lb.close();
+      lb.addEventListener('click', (e) => { if (e.target === lb) lb.close(); });
+      const root = document.documentElement, tb = document.getElementById('theme'), sys = matchMedia('(prefers-color-scheme: dark)');
+      const mode = () => root.dataset.theme || (sys.matches ? 'dark' : 'light');
+      const sync = () => { root.dataset.mode = mode(); tb.setAttribute('aria-label', mode() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'); };
+      tb.onclick = () => { const n = mode() === 'dark' ? 'light' : 'dark'; root.dataset.theme = n; try { localStorage.setItem('theme', n); } catch (e) {} sync(); };
+      sys.addEventListener('change', () => { if (!root.dataset.theme) sync(); });
+      sync();
+      const menu = document.querySelector('.menu');
+      addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); } });
+      lb.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') open(idx - 1); if (e.key === 'ArrowRight') open(idx + 1); });
+    })();
+  </script>
+</body>
+</html>

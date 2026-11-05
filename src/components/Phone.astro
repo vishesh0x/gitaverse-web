@@ -1,0 +1,8 @@
+---
+import { has } from '../config';
+const { name, alt = '' } = Astro.props;
+const file = ['png', 'webp', 'jpg'].map((e) => `/screenshots/${name}.${e}`).find(has);
+---
+<div class="phone">
+  {file ? <img src={file} alt={alt} loading="lazy" /> : <p class="slot">Add<br /><b>{`public/screenshots/${name}.png`}</b></p>}
+</div>

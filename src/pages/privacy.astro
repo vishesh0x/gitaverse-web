@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+import { SITE } from '../config';
+---
+<Layout title="Privacy policy: no data collected" description="GitaVerse collects nothing. The app has no internet permission, no accounts, no analytics and no ads. Your notes and progress stay on your phone.">
+<main id="main">
+<PageHead title="Privacy policy" lead="Last updated 5 November 2026. Applies to GitaVerse and this website." />
+<section class="light"><div class="wrap prose">
+  <p>GitaVerse is made to be private. This is a plain summary of how the app treats your information.</p>
+  <h2>What we collect</h2>
+  <p>Nothing. GitaVerse has no accounts, no ads, no analytics and no crash reporting, and the app has no permission to use the internet. We never receive anything you read, save or write.</p>
+  <h2>What stays on your phone</h2>
+  <p>Your name (if you add one), reading progress, streak, saved verses, collections, notes and settings are kept only on your phone, inside the app. They are removed when you uninstall the app or clear its storage, and they are not part of Android’s cloud backup.</p>
+  <h2>Notifications</h2>
+  <p>If you turn on the daily reminder, the app asks for permission to show notifications. The reminder is scheduled on your phone and nothing is sent anywhere.</p>
+  <h2>Sharing, backups and exports</h2>
+  <p>When you share a verse or your notes, or save a backup file, the text goes only to the app or place you choose. GitaVerse does not see or keep a copy. Keep backup files safe: they hold your notes as plain text.</p>
+  <h2>Children</h2>
+  <p>GitaVerse does not collect personal information from anyone, including children.</p>
+  <h2>This website</h2>
+  <p>This website uses no cookies, no analytics and no third-party scripts, and its fonts are served from the site itself. It is hosted on Cloudflare, which, like any web host, processes standard request data such as IP addresses to deliver pages and keep the service secure. Links to Google Play and GitHub are governed by those services’ own policies.</p>
+  <h2>Changes</h2>
+  <p>If this ever changes, the app and its store page will say so before the change takes effect. Questions: <a href={`mailto:${SITE.mail}`}>{SITE.mail}</a>.</p>
+</div></section></main>
+</Layout>

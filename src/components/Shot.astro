@@ -1,0 +1,5 @@
+---
+const { src, w, h, alt, group, label = 'Enlarge' } = Astro.props;
+const cls = Astro.props.class;
+---
+<button type="button" class:list={['zoom', cls]} data-zoom data-group={group} aria-label={`${label}: ${alt}`}><img src={src} width={w} height={h} alt={alt} loading="lazy" /></button>

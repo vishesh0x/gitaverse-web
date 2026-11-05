@@ -1,0 +1,14 @@
+---
+import Icon from '../components/Icon.astro';
+import Layout from '../layouts/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+import { SITE } from '../config';
+---
+<Layout title="Something went wrong" noindex>
+<main id="main">
+  <PageHead title="Something went wrong." lead="The site had a problem loading this page. Try again in a moment. The app is not affected: it works fully offline."><p class="code" aria-hidden="true">500</p></PageHead>
+  <section class="light"><div class="wrap">
+    <div class="cta"><button class="btn" type="button" onclick="location.reload()"><Icon name="refresh" />Try again</button><a class="btn alt" href="/"><Icon name="home" />Go home</a><a class="btn alt" href={`mailto:${SITE.mail}?subject=GitaVerse%20website%20problem`}><Icon name="mail" />Report the problem</a></div>
+  </div></section>
+</main>
+</Layout>

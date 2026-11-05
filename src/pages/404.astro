@@ -1,0 +1,18 @@
+---
+import Icon from '../components/Icon.astro';
+import Layout from '../layouts/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+---
+<Layout title="Page not found" noindex>
+<main id="main">
+  <PageHead title="That page isn’t here." lead="The link may be old or mistyped. Here is where you can go instead."><p class="code" aria-hidden="true">404</p></PageHead>
+  <section class="light"><div class="wrap">
+    <nav class="links" aria-label="Pages">
+      <a href="/"><Icon name="home" />Home<span>The reader and screenshots</span></a>
+      <a href="/chapters"><Icon name="book" />Chapters<span>All 18, with summaries</span></a>
+      <a href="/features"><Icon name="list" />Features<span>What the app does</span></a>
+      <a href="/privacy"><Icon name="shield" />Privacy policy<span>Nothing collected</span></a>
+    </nav>
+  </div></section>
+</main>
+</Layout>
