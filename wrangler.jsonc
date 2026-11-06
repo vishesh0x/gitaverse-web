@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "gitaverse-web",
+  "compatibility_date": "2026-08-01",
+  "assets": {
+    "directory": "./dist",
+    // Serve the nearest 404.html, with a 404 status, for any URL that has no matching file.
+    "not_found_handling": "404-page"
+  }
+}
