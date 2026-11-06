@@ -33,15 +33,21 @@ public/
 
 The sitemap is generated from `PAGES` in `src/config.ts`. Add new pages there.
 
-## Deploying to Cloudflare Pages
+## Deploying to Cloudflare
+
+The site is static and works on both Cloudflare Workers (static assets) and Cloudflare Pages.
+
+**Workers (default for new projects).** `wrangler.jsonc` points at `dist` and sets `not_found_handling` to `404-page`, so any unknown URL returns `404.html` with a 404 status. Without that setting only `/404` itself would show the styled page. Set the Worker's name in the dashboard to match `name` in `wrangler.jsonc`.
 
 | Setting | Value |
 | --- | --- |
 | Build command | `npm run build` |
-| Build output directory | `dist` |
+| Deploy command | `npx wrangler deploy` |
 | Environment variable | `NODE_VERSION=22` |
 
-`404.html` is served automatically for unknown paths. `error.html` is for use with a Cloudflare custom error rule for 5xx responses.
+**Pages.** Use `npm run build` as the build command and `dist` as the output directory. Pages serves `404.html` for unknown paths automatically.
+
+`error.html` is for use with a Cloudflare custom error rule for 5xx responses.
 
 ## Theme
 
