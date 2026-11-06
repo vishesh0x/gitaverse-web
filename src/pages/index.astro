@@ -1,169 +1,387 @@
 ---
-import Icon from '../components/Icon.astro';
-import Layout from '../layouts/Layout.astro';
-import ChapterList from '../components/ChapterList.astro';
-import Shot from '../components/Shot.astro';
-import Get from '../components/Get.astro';
-import { SITE, groups, phone, tablet, verse } from '../config';
+import Icon from "../components/Icon.astro";
+import Layout from "../layouts/Layout.astro";
+import ChapterList from "../components/ChapterList.astro";
+import Shot from "../components/Shot.astro";
+import Get from "../components/Get.astro";
+import { SITE, groups, phone, tablet, verse } from "../config";
+// Verse 2.47 and its word meanings come from the app's content files (see config.ts).
 const w = verse.words;
 ---
-<Layout seoTitle="GitaVerse | Offline Bhagavad Gita App for Android" description="Read the Bhagavad Gita offline in Sanskrit, transliteration, Hindi and English. Tap any word for its meaning. Free, open source, no ads and no tracking.">
-<main id="main">
-  <section class="hero">
-    <div class="copy">
-      <h1 class="h">The Gita, <br />offline.</h1>
-      <p class="lede h" style="--d:80ms">Read every verse of the Bhagavad Gita in Sanskrit, transliteration, Hindi and English. Tap any word for its meaning. No ads, no tracking, no internet permission.</p>
-      <div class="cta h" style="--d:160ms">
-        <a class="btn" href={SITE.play}><Icon name="play" />Get it on Google Play</a>
-        <a class="btn alt" href={SITE.release}><Icon name="download" />Download the APK</a>
-      </div>
-      <p class="small h" style="--d:240ms">Free. Android 8.0 and up. Version {SITE.version}, 18 chapters, 700 verses.</p>
-    </div>
-    <div class="pic"><img src="/shots/hero.webp" width="900" height="1167" alt="GitaVerse on two phones, one dark and one light, showing Bhagavad Gita 2.47 in Sanskrit" fetchpriority="high" /></div>
-  </section>
 
-  <section class="reader light" id="reader">
-    <div class="wrap">
-      <div class="sh"><h2 class="rise">Try the reader on verse {verse.ref}.</h2>
-        <p class="lead rise">Switch layers on and off the way you would in the app. Tap a Sanskrit word to see what it means, in English, Hindi or both.</p></div>
-      <div class="ctl rise">
-        <div class="grp" role="group" aria-label="Verse layers"><span>Show</span>
-          <button aria-pressed="true" data-layer="sa">Sanskrit</button><button aria-pressed="true" data-layer="tr">Transliteration</button>
-          <button aria-pressed="true" data-layer="hi">Hindi</button><button aria-pressed="true" data-layer="en">English</button></div>
-        <div class="grp" role="group" aria-label="Word meaning language"><span>Meanings in</span>
-          <button aria-pressed="false" data-mode="en">English</button><button aria-pressed="false" data-mode="hi">हिन्दी</button><button aria-pressed="true" data-mode="both">Both</button></div>
-      </div>
-      <div class="verse rise">
-        <p class="sa" data-l="sa" lang="sa" translate="no">
-          {w.map((x, i) => <><button class="w" aria-pressed="false" data-s={x[0]} data-en={x[1]} data-hi={x[2]}>{x[0]}</button>{i + 1 === verse.split && <span class="gap"></span>}</>)}
+<Layout
+  seoTitle="GitaVerse | Offline Bhagavad Gita App for Android"
+  description="Read the Bhagavad Gita offline in Sanskrit, transliteration, Hindi and English. Tap any word for its meaning. Free, open source, no ads and no tracking."
+>
+  <main id="main">
+    <section class="hero">
+      <div class="copy">
+        <h1 class="h">The Gita, <br />offline.</h1>
+        <p class="lede h" style="--d:80ms">
+          Read every verse of the Bhagavad Gita in Sanskrit, transliteration,
+          Hindi and English. Tap any word for its meaning. No ads, no tracking,
+          no internet permission.
         </p>
-        <div class="side">
-          <p class="tr" data-l="tr">{verse.translit[0]}<br />{verse.translit[1]}</p>
-          <p class="hi" data-l="hi" lang="hi">{verse.hindi}</p>
-          <p class="en" data-l="en">{verse.english}</p>
-          <div class="mean" id="mean" role="status" aria-live="polite"><b lang="sa" translate="no">Tap a word</b><span>Its meaning appears here.</span></div>
+        <div class="cta h" style="--d:160ms">
+          <a class="btn" href={SITE.play}
+            ><Icon name="play" />Get it on Google Play</a
+          >
+          <a class="btn alt" href={SITE.release}
+            ><Icon name="download" />Download the APK</a
+          >
+        </div>
+        <p class="small h" style="--d:240ms">
+          Free. Android 8.0 and up. Version {SITE.version}, 18 chapters, 700
+          verses.
+        </p>
+      </div>
+      <div class="pic">
+        <img
+          src="/shots/hero.webp"
+          width="900"
+          height="1167"
+          alt="GitaVerse on two phones, one dark and one light, showing Bhagavad Gita 2.47 in Sanskrit"
+          fetchpriority="high"
+        />
+      </div>
+    </section>
+
+    <section class="reader light" id="reader">
+      <div class="wrap">
+        <div class="sh">
+          <h2 class="rise">Try the reader on verse {verse.ref}.</h2>
+          <p class="lead rise">
+            Switch layers on and off the way you would in the app. Tap a
+            Sanskrit word to see what it means, in English, Hindi or both.
+          </p>
+        </div>
+        <div class="ctl rise">
+          <div class="grp" role="group" aria-label="Verse layers">
+            <span>Show</span>
+            <button aria-pressed="true" data-layer="sa">Sanskrit</button><button
+              aria-pressed="true"
+              data-layer="tr">Transliteration</button
+            >
+            <button aria-pressed="true" data-layer="hi">Hindi</button><button
+              aria-pressed="true"
+              data-layer="en">English</button>
+          </div>
+          <div class="grp" role="group" aria-label="Word meaning language">
+            <span>Meanings in</span>
+            <button aria-pressed="false" data-mode="en">English</button><button
+              aria-pressed="false"
+              data-mode="hi">हिन्दी</button
+            ><button aria-pressed="true" data-mode="both">Both</button>
+          </div>
+        </div>
+        <div class="verse rise">
+          <p class="sa" data-l="sa" lang="sa" translate="no">
+            {
+              w.map((x, i) => (
+                <>
+                  <button
+                    class="w"
+                    aria-pressed="false"
+                    data-s={x[0]}
+                    data-en={x[1]}
+                    data-hi={x[2]}
+                  >
+                    {x[0]}
+                  </button>
+                  {i + 1 === verse.split && <span class="gap" />}
+                </>
+              ))
+            }
+          </p>
+          <div class="side">
+            <p class="tr" data-l="tr">
+              {verse.translit[0]}<br />{verse.translit[1]}
+            </p>
+            <p class="hi" data-l="hi" lang="hi">{verse.hindi}</p>
+            <p class="en" data-l="en">{verse.english}</p>
+            <div class="mean" id="mean" role="status" aria-live="polite">
+              <b lang="sa" translate="no">Tap a word</b><span
+                >Its meaning appears here.</span>
+            </div>
+          </div>
+        </div>
+        <p class="small" style="margin-top:1rem">
+          Verse text and translations: Ved Vyas Foundation, public domain. Word
+          meanings were written with an AI assistant and can contain mistakes. <a
+            href="/credits">Credits</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="shots" id="screens">
+      <div class="wrap railbar">
+        <div class="sh" style="margin-bottom:0">
+          <h2 class="rise">Light, dark, phone, tablet.</h2>
+        </div>
+        <div class="arrows" role="group" aria-label="Scroll screenshots">
+          <button type="button" id="rprev" aria-label="Previous screenshots"
+            ><Icon name="left" /></button
+          ><button type="button" id="rnext" aria-label="Next screenshots"
+            ><Icon name="right" /></button>
         </div>
       </div>
-      <p class="small" style="margin-top:1rem">Verse text and translations: Ved Vyas Foundation, public domain. Word meanings were written with an AI assistant and can contain mistakes. <a href="/credits">Credits</a></p>
-    </div>
-  </section>
-
-  <section class="shots" id="screens">
-    <div class="wrap railbar">
-      <div class="sh" style="margin-bottom:0"><h2 class="rise">Light, dark, phone, tablet.</h2></div>
-      <div class="arrows" role="group" aria-label="Scroll screenshots"><button type="button" id="rprev" aria-label="Previous screenshots"><Icon name="left" /></button><button type="button" id="rnext" aria-label="Next screenshots"><Icon name="right" /></button></div>
-    </div>
-    <div class="rail" id="rail" tabindex="0" aria-label="Phone screenshots">
-      {phone.map(([n, a]) => <Shot class="rise" src={`/shots/phone-${n}.webp`} w={720} h={1280} alt={`GitaVerse on a phone: ${a}`} group="phone" />)}
-    </div>
-  </section>
-
-  <section class="light" id="chapters">
-    <div class="wrap">
-      <div class="sh"><h2 class="rise">18 chapters. 700 verses.</h2>
-        <p class="lead rise">All three parts of the Gita, from Arjuna’s doubt on the battlefield to the final call to surrender.</p></div>
-      <ChapterList />
-      <p class="more"><a class="btn alt" href="/chapters"><Icon name="book" />Chapter summaries and glossary</a></p>
-    </div>
-  </section>
-
-  <section class="tablets light">
-    <div class="wrap">
-      <div class="sh"><h2 class="rise">Made for the bigger screen too.</h2></div>
-      <div class="tgrid">
-        {tablet.map(([n, a]) => <Shot class="wipe" src={`/shots/tablet-${n}.webp`} w={1600} h={900} alt={`GitaVerse on a tablet: ${a}`} group="tablet" />)}
+      <div class="rail" id="rail" tabindex="0" aria-label="Phone screenshots">
+        {
+          phone.map(([n, a]) => (
+            <Shot
+              class="rise"
+              src={`/shots/phone-${n}.webp`}
+              w={720}
+              h={1280}
+              alt={`GitaVerse on a phone: ${a}`}
+              group="phone"
+            />
+          ))
+        }
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="private" id="private">
-    <div class="wrap">
-      <div class="sh"><h2 class="rise">It never goes online. It can’t.</h2></div>
-      <div class="grid">
-        <p class="lead rise">GitaVerse has no INTERNET permission, so there is nothing it could send anywhere. No accounts, no analytics, no ads. Your notes, bookmarks and progress stay on the device, and Android’s automatic backup is off. <a href="/privacy">Read the privacy policy</a>.</p>
-        <div class="perm rise">
-          <div><b>Internet</b><span><Icon name="x" />Not requested</span></div>
-          <div><b>Storage</b><span><Icon name="x" />Not needed</span></div>
-          <div><b>Accounts, analytics, ads</b><span><Icon name="x" />None</span></div>
-          <div><b>Notifications</b><span class="y"><Icon name="bell" />Only if you turn on the reminder</span></div>
+    <section class="light" id="chapters">
+      <div class="wrap">
+        <div class="sh">
+          <h2 class="rise">18 chapters. 700 verses.</h2>
+          <p class="lead rise">
+            All three parts of the Gita, from Arjuna’s doubt on the battlefield
+            to the final call to surrender.
+          </p>
+        </div>
+        <ChapterList />
+        <p class="more">
+          <a class="btn alt" href="/chapters"
+            ><Icon name="book" />Chapter summaries and glossary</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="tablets light">
+      <div class="wrap">
+        <div class="sh">
+          <h2 class="rise">Made for the bigger screen too.</h2>
+        </div>
+        <div class="tgrid">
+          {
+            tablet.map(([n, a]) => (
+              <Shot
+                class="wipe"
+                src={`/shots/tablet-${n}.webp`}
+                w={1600}
+                h={900}
+                alt={`GitaVerse on a tablet: ${a}`}
+                group="tablet"
+              />
+            ))
+          }
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="light" id="features">
-    <div class="wrap">
-      <div class="sh"><h2 class="rise">Everything a verse needs.</h2></div>
-      {groups.map(([g, items]) => (
-        <div class="fg rise"><h3>{g}</h3><dl>{items.slice(0, 2).map(([t, d]) => <div><dt>{t}</dt><dd>{d}</dd></div>)}</dl></div>
-      ))}
-      <p class="more"><a class="btn alt" href="/features"><Icon name="list" />See all features</a></p>
-    </div>
-  </section>
-
-  <section class="words light">
-    <div class="wrap">
-      <div class="sh"><h2 class="rise">Where the words come from.</h2></div>
-      <div class="cols">
-        <p class="rise">The Sanskrit verses, transliteration, and Hindi and English translations come from the Gita app by the Ved Vyas Foundation, released into the public domain under the Unlicense.</p>
-        <p class="rise">The word-by-word meanings and glossary were written with an AI assistant and may contain mistakes. For serious study, check them against a teacher you trust. <a href="/credits">Full credits and licences</a>.</p>
+    <section class="private" id="private">
+      <div class="wrap">
+        <div class="sh">
+          <h2 class="rise">It never goes online. It can’t.</h2>
+        </div>
+        <div class="grid">
+          <p class="lead rise">
+            GitaVerse has no INTERNET permission, so there is nothing it could
+            send anywhere. No accounts, no analytics, no ads. Your notes,
+            bookmarks and progress stay on the device, and Android’s automatic
+            backup is off. <a href="/privacy">Read the privacy policy</a>.
+          </p>
+          <div class="perm rise">
+            <div>
+              <b>Internet</b><span><Icon name="x" />Not requested</span>
+            </div>
+            <div><b>Storage</b><span><Icon name="x" />Not needed</span></div>
+            <div>
+              <b>Accounts, analytics, ads</b><span><Icon name="x" />None</span>
+            </div>
+            <div>
+              <b>Notifications</b><span class="y"
+                ><Icon name="bell" />Only if you turn on the reminder</span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <Get />
-
-  <section class="source" id="source">
-    <div class="wrap">
-      <div>
-        <h2 class="rise">Open source. Yours to read.</h2>
-        <p class="rise">Written in Kotlin with Jetpack Compose and licensed GPL v3 or later. The content is plain JSON, one file per layer per chapter, so fixing a translation is a small edit.</p>
-        <div class="cta rise"><a class="btn" href={SITE.source}><Icon name="code" />Source on GitHub</a><a class="btn alt" href={SITE.release}><Icon name="package" />Latest release</a></div>
+    <section class="light" id="features">
+      <div class="wrap">
+        <div class="sh"><h2 class="rise">Everything a verse needs.</h2></div>
+        {
+          groups.map(([g, items]) => (
+            <div class="fg rise">
+              <>
+                <h3>{g}</h3>
+                <dl>
+                  {items.slice(0, 2).map(([t, d]) => (
+                    <div>
+                      <dt>{t}</dt>
+                      <dd>{d}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </>
+            </div>
+          ))
+        }
+        <p class="more">
+          <a class="btn alt" href="/features"
+            ><Icon name="list" />See all features</a>
+        </p>
       </div>
-      <pre class="rise"><code>git clone {SITE.source}
+    </section>
+
+    <section class="words light">
+      <div class="wrap">
+        <div class="sh"><h2 class="rise">Where the words come from.</h2></div>
+        <div class="cols">
+          <p class="rise">
+            The Sanskrit verses, transliteration, and Hindi and English
+            translations come from the Gita app by the Ved Vyas Foundation,
+            released into the public domain under the Unlicense.
+          </p>
+          <p class="rise">
+            The word-by-word meanings and glossary were written with an AI
+            assistant and may contain mistakes. For serious study, check them
+            against a teacher you trust. <a href="/credits"
+              >Full credits and licences</a
+            >.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <Get />
+
+    <section class="source" id="source">
+      <div class="wrap">
+        <div>
+          <h2 class="rise">Open source. Yours to read.</h2>
+          <p class="rise">
+            Written in Kotlin with Jetpack Compose and licensed GPL v3 or later.
+            The content is plain JSON, one file per layer per chapter, so fixing
+            a translation is a small edit.
+          </p>
+          <div class="cta rise">
+            <a class="btn" href={SITE.source}
+              ><Icon name="code" />Source on GitHub</a
+            ><a class="btn alt" href={SITE.release}
+              ><Icon name="package" />Latest release</a>
+          </div>
+        </div>
+        <pre
+          class="rise"><code>git clone {SITE.source}
 cd gitaverse
 gradle :app:assembleDebug</code></pre>
-    </div>
-  </section>
-</main>
-<script is:inline>
-  (() => {
-    const $ = (s) => [...document.querySelectorAll(s)], mean = document.getElementById('mean');
-    let mode = 'both', cur = null;
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const show = () => {
-      if (!cur) return;
-      mean.replaceChildren();
-      const mk = (t, c, l) => { const e = document.createElement(t); e.textContent = c; if (l) e.lang = l; mean.append(e); };
-      mk('b', cur.dataset.s, 'sa');
-      if (mode !== 'hi') mk('span', cur.dataset.en);
-      if (mode !== 'en') mk('span', cur.dataset.hi, 'hi');
-    };
-    $('[data-layer]').forEach((b) => b.addEventListener('click', () => {
-      const on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', on);
-      $('[data-l="' + b.dataset.layer + '"]').forEach((e) => {
-        if (on) { e.hidden = false; e.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 160, easing: 'cubic-bezier(.23,1,.32,1)' }); }
-        else e.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120, easing: 'ease-out' }).finished.then(() => { if (b.getAttribute('aria-pressed') !== 'true') e.hidden = true; });
-      });
-    }));
-    $('[data-mode]').forEach((b) => b.addEventListener('click', () => {
-      mode = b.dataset.mode; $('[data-mode]').forEach((x) => x.setAttribute('aria-pressed', x === b)); show();
-    }));
-    $('.w').forEach((w) => w.addEventListener('click', () => {
-      $('.w').forEach((x) => x.setAttribute('aria-pressed', x === w)); cur = w; show();
-      if (!reduce) mean.animate([{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 160, easing: 'cubic-bezier(.23,1,.32,1)' });
-    }));
-    const rail = document.getElementById('rail'), pv = document.getElementById('rprev'), nx = document.getElementById('rnext');
-    const upd = () => { pv.disabled = rail.scrollLeft < 8; nx.disabled = rail.scrollLeft > rail.scrollWidth - rail.clientWidth - 8; };
-    const step = () => rail.clientWidth * .8;
-    pv.onclick = () => rail.scrollBy({ left: -step(), behavior: reduce ? 'auto' : 'smooth' });
-    nx.onclick = () => rail.scrollBy({ left: step(), behavior: reduce ? 'auto' : 'smooth' });
-    rail.addEventListener('scroll', upd, { passive: true }); upd();
-    const hi = document.querySelector('.hero .pic img');
-    if (hi && !reduce) {
-      let t = false;
-      addEventListener('scroll', () => { if (t || innerWidth < 861) return; t = true; requestAnimationFrame(() => { hi.style.transform = 'translateY(' + Math.min(scrollY, 700) * .07 + 'px) scale(1.06)'; t = false; }); }, { passive: true });
-    }
-  })();
-</script>
+      </div>
+    </section>
+  </main>
+  <script is:inline>
+    (() => {
+      // Reader: layer toggles, meaning language and word taps.
+      const $ = (s) => [...document.querySelectorAll(s)],
+        mean = document.getElementById("mean");
+      let mode = "both",
+        cur = null;
+      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const show = () => {
+        if (!cur) return;
+        mean.replaceChildren();
+        const mk = (t, c, l) => {
+          const e = document.createElement(t);
+          e.textContent = c;
+          if (l) e.lang = l;
+          mean.append(e);
+        };
+        mk("b", cur.dataset.s, "sa");
+        if (mode !== "hi") mk("span", cur.dataset.en);
+        if (mode !== "en") mk("span", cur.dataset.hi, "hi");
+      };
+      $("[data-layer]").forEach((b) =>
+        b.addEventListener("click", () => {
+          const on = b.getAttribute("aria-pressed") !== "true";
+          b.setAttribute("aria-pressed", on);
+          $('[data-l="' + b.dataset.layer + '"]').forEach((e) => {
+            if (on) {
+              e.hidden = false;
+              e.animate([{ opacity: 0 }, { opacity: 1 }], {
+                duration: 160,
+                easing: "cubic-bezier(.23,1,.32,1)",
+              });
+            } else
+              e.animate([{ opacity: 1 }, { opacity: 0 }], {
+                duration: 120,
+                easing: "ease-out",
+              }).finished.then(() => {
+                if (b.getAttribute("aria-pressed") !== "true") e.hidden = true;
+              });
+          });
+        }),
+      );
+      $("[data-mode]").forEach((b) =>
+        b.addEventListener("click", () => {
+          mode = b.dataset.mode;
+          $("[data-mode]").forEach((x) =>
+            x.setAttribute("aria-pressed", x === b),
+          );
+          show();
+        }),
+      );
+      $(".w").forEach((w) =>
+        w.addEventListener("click", () => {
+          $(".w").forEach((x) => x.setAttribute("aria-pressed", x === w));
+          cur = w;
+          show();
+          if (!reduce)
+            mean.animate(
+              [
+                { opacity: 0, transform: "translateY(4px)" },
+                { opacity: 1, transform: "none" },
+              ],
+              { duration: 160, easing: "cubic-bezier(.23,1,.32,1)" },
+            );
+        }),
+      );
+      // Screenshot rail: arrow buttons and their disabled state at either end.
+      const rail = document.getElementById("rail"),
+        pv = document.getElementById("rprev"),
+        nx = document.getElementById("rnext");
+      const upd = () => {
+        pv.disabled = rail.scrollLeft < 8;
+        nx.disabled = rail.scrollLeft > rail.scrollWidth - rail.clientWidth - 8;
+      };
+      const step = () => rail.clientWidth * 0.8;
+      pv.onclick = () =>
+        rail.scrollBy({ left: -step(), behavior: reduce ? "auto" : "smooth" });
+      nx.onclick = () =>
+        rail.scrollBy({ left: step(), behavior: reduce ? "auto" : "smooth" });
+      rail.addEventListener("scroll", upd, { passive: true });
+      upd();
+      // The hero image drifts slightly as the page scrolls. Skipped for reduced motion and on narrow screens.
+      const hi = document.querySelector(".hero .pic img");
+      if (hi && !reduce) {
+        let t = false;
+        addEventListener(
+          "scroll",
+          () => {
+            if (t || innerWidth < 861) return;
+            t = true;
+            requestAnimationFrame(() => {
+              hi.style.transform =
+                "translateY(" +
+                Math.min(scrollY, 700) * 0.07 +
+                "px) scale(1.06)";
+              t = false;
+            });
+          },
+          { passive: true },
+        );
+      }
+    })();
+  </script>
 </Layout>

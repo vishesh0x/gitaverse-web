@@ -1,3 +1,27 @@
-{ "name": "gitaverse-site", "type": "module", "private": true,
-  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
-  "dependencies": { "astro": "^7.4.5", "@fontsource-variable/bricolage-grotesque": "latest", "@fontsource/tiro-devanagari-sanskrit": "latest" } }
+{
+  "name": "gitaverse-site",
+  "version": "1.0.0",
+  "description": "Website for GitaVerse, an offline Bhagavad Gita reader for Android.",
+  "license": "GPL-3.0-or-later",
+  "author": "Vishesh Raghuvanshi <mail@visheshraghuvanshi.in>",
+  "homepage": "https://gitaverse.visheshraghuvanshi.in",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vishesh0x/gitaverse-web.git"
+  },
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^7.4.5",
+    "@fontsource-variable/bricolage-grotesque": "latest",
+    "@fontsource/tiro-devanagari-sanskrit": "latest"
+  }
+}

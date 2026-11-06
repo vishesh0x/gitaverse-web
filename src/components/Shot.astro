@@ -1,5 +1,14 @@
 ---
-const { src, w, h, alt, group, label = 'Enlarge' } = Astro.props;
+// Thumbnail button that opens the image in the shared viewer defined in Layout.astro. Images in one group are navigable together.
+const { src, w, h, alt, group, label = "Enlarge" } = Astro.props;
 const cls = Astro.props.class;
 ---
-<button type="button" class:list={['zoom', cls]} data-zoom data-group={group} aria-label={`${label}: ${alt}`}><img src={src} width={w} height={h} alt={alt} loading="lazy" /></button>
+
+<button
+  type="button"
+  class:list={["zoom", cls]}
+  data-zoom
+  data-group={group}
+  aria-label={`${label}: ${alt}`}
+  ><img src={src} width={w} height={h} alt={alt} loading="lazy" /></button
+>

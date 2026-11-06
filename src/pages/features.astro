@@ -1,23 +1,91 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PageHead from '../components/PageHead.astro';
-import Get from '../components/Get.astro';
-import { groups } from '../config';
-const keys = [['Move between controls', 'Tab, Shift+Tab, arrows'], ['Press the selected control', 'Enter or Space'], ['Switch tab (Home, Read, Saved, Me)', 'Ctrl+1 to Ctrl+4'], ['Search', '/ or Ctrl+K'], ['Go back', 'Esc'], ['Show the shortcut list', '? or Ctrl+/'], ['Next verse, in the reader', 'N'], ['Previous verse', 'P'], ['Bookmark the verse', 'B'], ['Change text size', 'T']];
+import Layout from "../layouts/Layout.astro";
+import PageHead from "../components/PageHead.astro";
+import Get from "../components/Get.astro";
+import { groups } from "../config";
+const keys = [
+  ["Move between controls", "Tab, Shift+Tab, arrows"],
+  ["Press the selected control", "Enter or Space"],
+  ["Switch tab (Home, Read, Saved, Me)", "Ctrl+1 to Ctrl+4"],
+  ["Search", "/ or Ctrl+K"],
+  ["Go back", "Esc"],
+  ["Show the shortcut list", "? or Ctrl+/"],
+  ["Next verse, in the reader", "N"],
+  ["Previous verse", "P"],
+  ["Bookmark the verse", "B"],
+  ["Change text size", "T"],
+];
 ---
-<Layout title="Gita app features: word meanings, notes, widget" description="Four verse layers, word-by-word meanings, private notes, a daily streak, a home-screen widget, search by verse number and keyboard support. All offline.">
-<main id="main">
-  <PageHead title="What GitaVerse does." lead="700 verses across 18 chapters, read and kept entirely on your phone." />
-  <section class="light"><div class="wrap">
-    {groups.map(([g, items]) => (
-      <div class="fg rise"><h2>{g}</h2><dl>{items.map(([t, d]) => <div><dt>{t}</dt><dd>{d}</dd></div>)}</dl></div>
-    ))}
-    <div class="fg rise"><h2>Home-screen widget</h2>
-      <dl><div><dt>Streak and goal</dt><dd>Shows your streak and today’s progress towards your goal, and redraws just after midnight.</dd></div>
-      <div><dt>Follows your theme</dt><dd>Matches the app, with its own Material You switch under Me, Appearance, on Android 12 and up.</dd></div></dl></div>
-    <div class="fg rise"><h2>Keyboard shortcuts</h2>
-      <div class="prose"><div class="tw"><table><tbody>{keys.map(([a, k]) => <tr><td>{a}</td><td><b>{k}</b></td></tr>)}</tbody></table></div></div></div>
-  </div></section>
-  <Get />
-</main>
+
+<Layout
+  title="Gita app features: word meanings, notes, widget"
+  description="Four verse layers, word-by-word meanings, private notes, a daily streak, a home-screen widget, search by verse number and keyboard support. All offline."
+>
+  <main id="main">
+    <PageHead
+      title="What GitaVerse does."
+      lead="700 verses across 18 chapters, read and kept entirely on your phone."
+    />
+    <section class="light">
+      <div class="wrap">
+        {
+          groups.map(([g, items]) => (
+            <div class="fg rise">
+              <>
+                <h2>{g}</h2>
+                <dl>
+                  {items.map(([t, d]) => (
+                    <div>
+                      <dt>{t}</dt>
+                      <dd>{d}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </>
+            </div>
+          ))
+        }
+        <div class="fg rise">
+          <h2>Home-screen widget</h2>
+          <dl>
+            <div>
+              <dt>Streak and goal</dt><dd>
+                Shows your streak and today’s progress towards your goal, and
+                redraws just after midnight.
+              </dd>
+            </div>
+            <div>
+              <dt>Follows your theme</dt><dd>
+                Matches the app, with its own Material You switch under Me,
+                Appearance, on Android 12 and up.
+              </dd>
+            </div>
+          </dl>
+        </div>
+        <div class="fg rise">
+          <h2>Keyboard shortcuts</h2>
+          <div class="prose">
+            <div class="tw">
+              <table>
+                <tbody
+                  >{
+                    keys.map(([a, k]) => (
+                      <tr>
+                        <>
+                          <td>{a}</td>
+                          <td>
+                            <b>{k}</b>
+                          </td>
+                        </>
+                      </tr>
+                    ))
+                  }</tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <Get />
+  </main>
 </Layout>

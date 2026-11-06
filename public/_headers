@@ -1,10 +1,18 @@
-# Inline styles and scripts are used for the page-level interactions, so the policy allows them; everything else is same-origin only.
+# Security and caching headers (Cloudflare Pages).
+# Inline scripts and styles are used for page-level behaviour, so the policy allows them for those two
+# directives only. Everything else is restricted to this origin, and the site makes no third-party requests.
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+
+# Image filenames are not fingerprinted, so keep their cache lifetime short enough for updates to appear.
 /shots/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=86400
+
+# Build output filenames contain a content hash, so these can be cached indefinitely.
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable

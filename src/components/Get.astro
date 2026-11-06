@@ -1,14 +1,31 @@
 ---
-import Icon from '../components/Icon.astro';
-import { SITE } from '../config';
+import Icon from "../components/Icon.astro";
+import { SITE } from "../config";
+// Closing download band shared by the home, features and chapters pages.
 ---
+
 <section class="get">
   <div class="wrap">
-    <img class="rise" src="/icon.png" width="512" height="512" alt="GitaVerse logo: Krishna with a peacock feather, reading an open book" loading="lazy" />
+    <img
+      class="rise"
+      src="/icon.png"
+      width="512"
+      height="512"
+      alt="GitaVerse logo: Krishna with a peacock feather, reading an open book"
+      loading="lazy"
+    />
     <div>
       <h2 class="rise">Free, with nothing to sign up for.</h2>
-      <p class="rise">Install it from Google Play, or download the APK from GitHub. Android 8.0 and up, phones, tablets and foldables.</p>
-      <div class="cta rise"><a class="btn" href={SITE.play}><Icon name="play" />Get it on Google Play</a><a class="btn alt" href={SITE.release}><Icon name="download" />Download the APK</a></div>
+      <p class="rise">
+        Install it from Google Play, or download the APK from GitHub.
+        Android 8.0 and up, phones, tablets and foldables.
+      </p>
+      <div class="cta rise">
+        <a class="btn" href={SITE.play}
+          ><Icon name="play" />Get it on Google Play</a
+        ><a class="btn alt" href={SITE.release}
+          ><Icon name="download" />Download the APK</a>
+      </div>
     </div>
   </div>
 </section>

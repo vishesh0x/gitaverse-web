@@ -1,4 +1,16 @@
 ---
+// Shared header so every inner page opens the same way. The slot is used for the large status code on error pages.
 const { title, lead } = Astro.props;
 ---
-<header class="phead"><div class="wrap"><slot /><h1 class="h">{title}</h1>{lead && <p class="lead h" style="--d:80ms">{lead}</p>}</div></header>
+
+<header class="phead">
+  <div class="wrap">
+    <slot /><h1 class="h">{title}</h1>{
+      lead && (
+        <p class="lead h" style="--d:80ms">
+          {lead}
+        </p>
+      )
+    }
+  </div>
+</header>

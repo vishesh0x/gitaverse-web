@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+# The server error page is a fallback, not content.
 Disallow: /error
 
 Sitemap: https://gitaverse.visheshraghuvanshi.in/sitemap.xml

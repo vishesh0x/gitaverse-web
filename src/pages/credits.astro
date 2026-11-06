@@ -1,25 +1,81 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PageHead from '../components/PageHead.astro';
-import { SITE } from '../config';
+import Layout from "../layouts/Layout.astro";
+import PageHead from "../components/PageHead.astro";
+import { SITE } from "../config";
 ---
-<Layout title="Credits and licences" description="Where the verses, translations, word meanings and fonts in GitaVerse come from, and the licence for each: Unlicense, SIL OFL and GPL v3.">
-<main id="main">
-<PageHead title="Credits and licences" lead="Made by Vishesh Raghuvanshi. Here is whose work GitaVerse is built on." />
-<section class="light"><div class="wrap prose">
-  <div class="tw"><table>
-    <thead><tr><th>Content</th><th>Source</th><th>Licence</th></tr></thead>
-    <tbody>
-      <tr><td>Sanskrit verses, transliteration, Hindi and English translations</td><td>Gita app by the Ved Vyas Foundation, <a href={SITE.gitaText}>github.com/gita/gita</a></td><td>Unlicense (public domain)</td></tr>
-      <tr><td>Word-by-word meanings and glossary</td><td>Written with Claude (Anthropic), an AI assistant</td><td>AI-generated, may contain mistakes</td></tr>
-      <tr><td>Fonts in the app: Paper Mono, Noto Sans Devanagari</td><td>Their authors</td><td>SIL Open Font License 1.1</td></tr>
-      <tr><td>Fonts on this website: Bricolage Grotesque, Tiro Devanagari Sanskrit</td><td>Via Fontsource, self-hosted</td><td>SIL Open Font License 1.1</td></tr>
-      <tr><td>App source code</td><td><a href={SITE.source}>GitHub</a></td><td>GPL v3 or later</td></tr>
-      <tr><td>GitaVerse name and logo</td><td>{SITE.author}</td><td>The author’s own artwork, all rights reserved</td></tr>
-    </tbody>
-  </table></div>
-  <div class="callout">Please check the word meanings against a trusted teacher or edition before relying on them for serious study.</div>
-  <h2>Fixing a mistake</h2>
-  <p>All text lives as plain JSON in the <a href={SITE.source}>source repository</a>, one file per layer per chapter. Found an error? Open an issue or a pull request, or write to <a href={`mailto:${SITE.mail}`}>{SITE.mail}</a>.</p>
-</div></section></main>
+
+<Layout
+  title="Credits and licences"
+  description="Where the verses, translations, word meanings and fonts in GitaVerse come from, and the licence for each: Unlicense, SIL OFL and GPL v3."
+>
+  <main id="main">
+    <PageHead
+      title="Credits and licences"
+      lead="Made by Vishesh Raghuvanshi. Here is whose work GitaVerse is built on."
+    />
+    <section class="light">
+      <div class="wrap prose">
+        <div class="tw">
+          <table>
+            <thead
+              ><tr><th>Content</th><th>Source</th><th>Licence</th></tr></thead
+            >
+            <tbody>
+              <tr
+                ><td
+                  >Sanskrit verses, transliteration, Hindi and English
+                  translations</td
+                ><td
+                  >Gita app by the Ved Vyas Foundation, <a href={SITE.gitaText}
+                    >github.com/gita/gita</a
+                  ></td
+                ><td>Unlicense (public domain)</td></tr
+              >
+              <tr
+                ><td>Word-by-word meanings and glossary</td><td
+                  >Written with Claude (Anthropic), an AI assistant</td
+                ><td>AI-generated, may contain mistakes</td></tr
+              >
+              <tr
+                ><td>Fonts in the app: Paper Mono, Noto Sans Devanagari</td><td
+                  >Their authors</td
+                ><td>SIL Open Font License 1.1</td></tr
+              >
+              <tr
+                ><td
+                  >Fonts on this website: Bricolage Grotesque, Tiro Devanagari
+                  Sanskrit</td
+                ><td>Via Fontsource, self-hosted</td><td
+                  >SIL Open Font License 1.1</td
+                ></tr
+              >
+              <tr
+                ><td>App source code</td><td
+                  ><a href={SITE.source}>GitHub</a></td
+                ><td>GPL v3 or later</td></tr
+              >
+              <tr
+                ><td>GitaVerse name and logo</td><td>{SITE.author}</td><td
+                  >The author’s own artwork, all rights reserved</td
+                ></tr
+              >
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          Please check the word meanings against a trusted teacher or edition
+          before relying on them for serious study.
+        </div>
+        <h2>Fixing a mistake</h2>
+        <p>
+          All text lives as plain JSON in the <a href={SITE.source}
+            >source repository</a
+          >, one file per layer per chapter. Found an error? Open an issue or a
+          pull request, or write to <a href={`mailto:${SITE.mail}`}
+            >{SITE.mail}</a
+          >.
+        </p>
+      </div>
+    </section>
+  </main>
 </Layout>
